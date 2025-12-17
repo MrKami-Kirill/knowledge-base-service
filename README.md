@@ -1,1 +1,1 @@
-# -knowledge-base-service
+# knowledge-base-service
