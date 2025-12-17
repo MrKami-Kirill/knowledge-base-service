@@ -1,6 +1,6 @@
 group = "ru.tecius"
 version = "1.0.0"
-description = "Knowledge Base Backend Service"
+description = "Knowledge Base Service Backend"
 
 dependencies {
     api(project(":api"))

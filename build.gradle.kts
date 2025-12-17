@@ -31,6 +31,7 @@ val micrometerRegistryPrometheusVersion: String by project
 val mapstructVersion: String by project
 val jacocoVersion: String by project
 val checkstyleVersion: String by project
+val minioVersion: String by project
 
 plugins {
     java
@@ -95,12 +96,15 @@ subprojects {
         implementation("org.springframework.boot:spring-boot-starter-data-jpa")
         implementation("org.postgresql:postgresql:$postgresqlVersion")
 
+        // MINIO
+        implementation("io.minio:minio:$minioVersion")
+
         // REDIS
         implementation("org.springframework.boot:spring-boot-starter-data-redis")
-        implementation("org.springframework.session:spring-session-data-redis")
+        // implementation("org.springframework.session:spring-session-data-redis")
 
         // ELASTIC SEARCH
-        implementation("org.springframework.boot:spring-boot-starter-data-elasticsearch")
+        // implementation("org.springframework.boot:spring-boot-starter-data-elasticsearch")
 
         // KAFKA
         implementation("org.springframework.kafka:spring-kafka")
