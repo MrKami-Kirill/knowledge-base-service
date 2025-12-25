@@ -26,6 +26,7 @@ val log4j2version: String by project
 val jclOverSlf4jVersion: String by project
 val postgresqlVersion: String by project
 val springDocOpenApiVersion: String by project
+val jsonPatchVersion: String by project
 val commonsCollections4Version: String by project
 val micrometerRegistryPrometheusVersion: String by project
 val mapstructVersion: String by project
@@ -39,11 +40,11 @@ plugins {
     checkstyle
     jacoco
     // https://plugins.gradle.org/plugin/org.springframework.boot
-    id("org.springframework.boot") version "3.5.8" apply false
+    id("org.springframework.boot") version "3.5.9" apply false
     // https://plugins.gradle.org/plugin/io.spring.dependency-management
     id("io.spring.dependency-management") version "1.1.7" apply false
     // https://plugins.gradle.org/plugin/org.sonarqube
-    id("org.sonarqube") version "7.2.1.6560"
+    id("org.sonarqube") version "7.2.2.6593"
     // https://plugins.gradle.org/plugin/com.google.cloud.tools.jib
     id("com.google.cloud.tools.jib") version "3.5.2" apply false
 }
@@ -93,26 +94,23 @@ subprojects {
         implementation("org.springframework.boot:spring-boot-starter-actuator")
 
         // POSTGRES
-        implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-        implementation("org.postgresql:postgresql:$postgresqlVersion")
+        // implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+        // implementation("org.postgresql:postgresql:$postgresqlVersion")
 
         // MINIO
-        implementation("io.minio:minio:$minioVersion")
+        // implementation("io.minio:minio:$minioVersion")
 
         // REDIS
-        implementation("org.springframework.boot:spring-boot-starter-data-redis")
-        // implementation("org.springframework.session:spring-session-data-redis")
-
-        // ELASTIC SEARCH
-        // implementation("org.springframework.boot:spring-boot-starter-data-elasticsearch")
+        // implementation("org.springframework.boot:spring-boot-starter-data-redis")
 
         // KAFKA
-        implementation("org.springframework.kafka:spring-kafka")
+        // implementation("org.springframework.kafka:spring-kafka")
 
         // SWAGGER
         implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:$springDocOpenApiVersion")
 
         // OTHER
+        implementation("com.github.java-json-tools:json-patch:$jsonPatchVersion")
         implementation("org.apache.commons:commons-collections4:$commonsCollections4Version")
         implementation("io.micrometer:micrometer-registry-prometheus:$micrometerRegistryPrometheusVersion")
         implementation("org.mapstruct:mapstruct:$mapstructVersion")

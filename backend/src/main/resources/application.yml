@@ -20,7 +20,7 @@ management:
       mode: full
 
 server:
-  port: \${SERVER_PORT:8082}
+  port: \${SERVER_PORT:8084}
   shutdown: graceful
 
 spring:
@@ -28,75 +28,69 @@ spring:
     name: ${rootProject.name}
   banner:
     location: banner.txt
-  data:
-    redis:
-      connect-timeout: \${REDIS_CONNECT_TIMEOUT:500}
-      cluster:
-        nodes: \${REDIS_CLUSTER_NODES:127.0.0.1:7001,127.0.0.1:7002,127.0.0.1:7003}
-        max-redirects: \${REDIS_CLUSTER_MAX_REDIRECTS:2}
-      username: \${REDIS_USERNAME:kbs_redis_user}
-      password: \${REDIS_PASSWORD:CXe5wRRkIrpkh39BzEprc76fKss12RdyY04Nep3VCyo=}
-      lettuce:
-        cluster:
-          refresh:
-            dynamic-refresh-sources: false
-        pool:
-          max-active: \${REDIS_LETTUCE_CLUSTER_POOL_MAX_ACTIVE:8}
-          max-idle: \${REDIS_LETTUCE_CLUSTER_POOL_MAX_IDLE:8}
-          min-idle: \${REDIS_LETTUCE_CLUSTER_POOL_MIN_IDLE:0}
-          max-wait: \${REDIS_LETTUCE_CLUSTER_POOL_MAX_WAIT:-1ms}
-  datasource:
-    url: jdbc:postgresql://\${POSTGRES_HOST:localhost}:\${POSTGRES_PORT:5432}/\${POSTGRES_DATASOURCE:db_knowledge_base}?ApplicationName=${rootProject.name}&stringtype=unspecified
-    username: \${POSTGRES_USERNAME:postgres}
-    password: \${POSTGRES_PASSWORD:postgres}
-    driver-class-name: org.postgresql.Driver
-    hikari:
-      maximum-pool-size: \${POSTGRES_HIKARI_MAXIMUM_POOL_SIZE:20}
-      connection-timeout: \${POSTGRES_HIKARI_CONNECTION_TIMEOUT:30000}
-      idle-timeout: \${POSTGRES_HIKARI_IDLE_TIMEOUT:600000}
-      max-life-time: \${POSTGRES_HIKARI_MAX_LIFE_TIME:1800000}
-  elasticsearch:
-    uris: localhost:9200
-    username: \${ELASTICSEARCH_USERNAME:kbs_elasticsearch_user}
-    password: \${ELASTICSEARCH_PASSWORD:ONvG0HJ3wBjP8Ee3Mg1ehrAm+m+BHwM2kHKQ44JcEOA=}
-    connection-timeout: \${ELASTICSEARCH_CONNECTION_TIMEOUT:5000}
-    socket-timeout: \${ELASTICSEARCH_SOCKET_TIMEOUT:30000}
-  jpa:
-    show_sql: \${SHOW_SQL:false}
-    open-in-view: false
-    database: default
-    properties:
-      hibernate:
-        show_sql: \${SHOW_SQL:false}
-        enable_lazy_load_no_trans: false
-        default_schema: \${POSTGRES_SCHEMA:db_knowledge_base}
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-        properties.hibernate.temp.use_jdbc_metadata_defaults: false
-        jdbc:
-          lob:
-            non_contextual_creation: true
-  kafka:
-    bootstrap-servers: \${KAFKA_BROKERS:localhost:9093}
-    properties:
-      session.timeout.ms: \${KAFKA_SESSION_TIMEOUT_MS:60000}
-      request.timeout.ms: \${KAFKA_REQUEST_TIMEOUT_MS:60000}
-      security.protocol: \${KAFKA_SECURITY_PROTOCOL:PLAINTEXT}
-      sasl.mechanism: \${KAFKA_SASL_MECHANISM:PLAIN}
-      sasl.jaas.config: \${KAFKA_SASL_JAAS_CONFIG:org.apache.kafka.common.security.plain.PlainLoginModule required username="kafka" password="kafka";}
-      ssl.keystore.location: \${KAFKA_SSL_KEYSTORE_LOCATION:classpath:kafka/dev/kafka.client.keystore.jks}
-      ssl.keystore.password: \${KAFKA_SSL_KEYSTORE_PASSWORD:123qwe}
-      ssl.key.password: \${KAFKA_SSL_KEY_PASSWORD:123qwe}
-      ssl.truststore.location: \${KAFKA_SSL_TRUSTSTORE_LOCATION:classpath:kafka/dev/kafka.client.truststore.jks}
-      ssl.truststore.password: \${KAFKA_SSL_TRUSTSTORE_PASSWORD:123qwe}
-    topics:
-      user-keycloak-update: \${USER_KEYCLOAK_UPDATE_TOPIC:user-keycloak-update}
-    consumer:
-      group-id: \${KAFKA_CONSUMER_GROUP_ID:knowledge-base-service}
-      enable-auto-commit: \${KAFKA_CONSUMER_ENABLE_AUTO_COMMIT:false}
-      auto-offset-reset: \${KAFKA_CONSUMER_AUTO_OFFSET_RESET:latest}
-      max-poll-records: \${KAFKA_CONSUMER_MAX_POLL_RECORDS:50}
-      properties:
-        max.poll.interval.ms: \${KAFKA_CONSUMER_MAX_POLL_INTERVAL_MS:300000}
+#  data:
+#    redis:
+#      connect-timeout: \${REDIS_CONNECT_TIMEOUT:500}
+#      cluster:
+#        nodes: \${REDIS_CLUSTER_NODES:127.0.0.1:7001,127.0.0.1:7002,127.0.0.1:7003}
+#        max-redirects: \${REDIS_CLUSTER_MAX_REDIRECTS:2}
+#      username: \${REDIS_USERNAME:kbs_redis_user}
+#      password: \${REDIS_PASSWORD:CXe5wRRkIrpkh39BzEprc76fKss12RdyY04Nep3VCyo=}
+#      lettuce:
+#        cluster:
+#          refresh:
+#            dynamic-refresh-sources: false
+#        pool:
+#          max-active: \${REDIS_LETTUCE_CLUSTER_POOL_MAX_ACTIVE:8}
+#          max-idle: \${REDIS_LETTUCE_CLUSTER_POOL_MAX_IDLE:8}
+#          min-idle: \${REDIS_LETTUCE_CLUSTER_POOL_MIN_IDLE:0}
+#          max-wait: \${REDIS_LETTUCE_CLUSTER_POOL_MAX_WAIT:-1ms}
+#  datasource:
+#    url: jdbc:postgresql://\${POSTGRES_HOST:localhost}:\${POSTGRES_PORT:5432}/\${POSTGRES_DATASOURCE:db_knowledge_base}?ApplicationName=${rootProject.name}&stringtype=unspecified
+#    username: \${POSTGRES_USERNAME:postgres}
+#    password: \${POSTGRES_PASSWORD:postgres}
+#    driver-class-name: org.postgresql.Driver
+#    hikari:
+#      maximum-pool-size: \${POSTGRES_HIKARI_MAXIMUM_POOL_SIZE:20}
+#      connection-timeout: \${POSTGRES_HIKARI_CONNECTION_TIMEOUT:30000}
+#      idle-timeout: \${POSTGRES_HIKARI_IDLE_TIMEOUT:600000}
+#      max-life-time: \${POSTGRES_HIKARI_MAX_LIFE_TIME:1800000}
+#  jpa:
+#    show_sql: \${SHOW_SQL:false}
+#    open-in-view: false
+#    database: default
+#    properties:
+#      hibernate:
+#        show_sql: \${SHOW_SQL:false}
+#        enable_lazy_load_no_trans: false
+#        default_schema: \${POSTGRES_SCHEMA:db_knowledge_base}
+#        dialect: org.hibernate.dialect.PostgreSQLDialect
+#        properties.hibernate.temp.use_jdbc_metadata_defaults: false
+#        jdbc:
+#          lob:
+#            non_contextual_creation: true
+#  kafka:
+#    bootstrap-servers: \${KAFKA_BROKERS:localhost:9093}
+#    properties:
+#      session.timeout.ms: \${KAFKA_SESSION_TIMEOUT_MS:60000}
+#      request.timeout.ms: \${KAFKA_REQUEST_TIMEOUT_MS:60000}
+#      security.protocol: \${KAFKA_SECURITY_PROTOCOL:PLAINTEXT}
+#      sasl.mechanism: \${KAFKA_SASL_MECHANISM:PLAIN}
+#      sasl.jaas.config: \${KAFKA_SASL_JAAS_CONFIG:org.apache.kafka.common.security.plain.PlainLoginModule required username="kafka" password="kafka";}
+#      ssl.keystore.location: \${KAFKA_SSL_KEYSTORE_LOCATION:classpath:kafka/dev/kafka.client.keystore.jks}
+#      ssl.keystore.password: \${KAFKA_SSL_KEYSTORE_PASSWORD:123qwe}
+#      ssl.key.password: \${KAFKA_SSL_KEY_PASSWORD:123qwe}
+#      ssl.truststore.location: \${KAFKA_SSL_TRUSTSTORE_LOCATION:classpath:kafka/dev/kafka.client.truststore.jks}
+#      ssl.truststore.password: \${KAFKA_SSL_TRUSTSTORE_PASSWORD:123qwe}
+#    topics:
+#      user-keycloak-update: \${USER_KEYCLOAK_UPDATE_TOPIC:user-keycloak-update}
+#    consumer:
+#      group-id: \${KAFKA_CONSUMER_GROUP_ID:knowledge-base-service}
+#      enable-auto-commit: \${KAFKA_CONSUMER_ENABLE_AUTO_COMMIT:false}
+#      auto-offset-reset: \${KAFKA_CONSUMER_AUTO_OFFSET_RESET:latest}
+#      max-poll-records: \${KAFKA_CONSUMER_MAX_POLL_RECORDS:50}
+#      properties:
+#        max.poll.interval.ms: \${KAFKA_CONSUMER_MAX_POLL_INTERVAL_MS:300000}
   main:
     web-application-type: servlet
   profiles:

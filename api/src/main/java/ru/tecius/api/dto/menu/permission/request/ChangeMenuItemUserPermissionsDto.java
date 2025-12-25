@@ -1,0 +1,18 @@
+package ru.tecius.api.dto.menu.permission.request;
+
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import java.util.List;
+
+@Schema(description = "DTO добавления/удаления разрешений пользователям у элемента меню")
+public record ChangeMenuItemUserPermissionsDto(
+    @Schema(description = "Список пользователей и разрешений", requiredMode = REQUIRED)
+    @NotNull(message = "Поле users не может быть null")
+    @NotEmpty(message = "Поле users не может быть пустым")
+    List<MenuItemUserPermissionsDto> users
+) {
+
+}
