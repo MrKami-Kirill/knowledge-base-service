@@ -1,5 +1,7 @@
 package ru.tecius.api.controller;
 
+import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -93,10 +95,11 @@ public interface AttachmentsController {
                   schema = @Schema(implementation = ErrorResponseDto.class)
               ))
       })
-  @PostMapping
+  @PostMapping(consumes = MULTIPART_FORM_DATA_VALUE)
   ResponseEntity<Void> addAttachment(
       @Schema(description = "ID документа", example = "019b4f74-58e2-7185-9a4b-b82619f12503")
       @PathVariable UUID documentId,
+      @Schema(description = "", implementation = AddAttachmentDto.class)
       @ModelAttribute @Valid AddAttachmentDto dto
   );
 

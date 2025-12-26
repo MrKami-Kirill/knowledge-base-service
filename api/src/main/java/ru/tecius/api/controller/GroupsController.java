@@ -91,6 +91,10 @@ public interface GroupsController {
   @ApiResponses(
       value = {
           @ApiResponse(responseCode = "204", description = "Группа пользователей изменена"),
+          @ApiResponse(responseCode = "400", description = "Ошибка обработки запроса",
+              content = @Content(
+                  schema = @Schema(implementation = ErrorResponseDto.class)
+              )),
           @ApiResponse(responseCode = "404", description = "Ошибка получения данных",
               content = @Content(
                   schema = @Schema(implementation = ErrorResponseDto.class)

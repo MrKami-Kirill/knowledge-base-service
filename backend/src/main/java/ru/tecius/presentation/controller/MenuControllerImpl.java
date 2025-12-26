@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.tecius.api.controller.MenuController;
 import ru.tecius.api.dto.menu.permission.request.ChangeMenuItemGroupPermissionsDto;
 import ru.tecius.api.dto.menu.permission.request.ChangeMenuItemUserPermissionsDto;
+import ru.tecius.api.dto.menu.request.MoveMenuItemDto;
+import ru.tecius.api.dto.menu.response.MenuItemResponseDto;
+import ru.tecius.api.dto.menu.response.MenuTreeResponseDto;
 import ru.tecius.api.dto.menu.user.response.MenuItemUsersResponseDto;
 
 @RestController
@@ -41,6 +44,21 @@ public class MenuControllerImpl implements MenuController {
 
   @Override
   public ResponseEntity<Void> changeMenuItemPermissions(UUID menuItemId, Map<String, Object> dto) {
+    return ResponseEntity.status(NO_CONTENT).build();
+  }
+
+  @Override
+  public ResponseEntity<MenuTreeResponseDto> getMenuTree(String path) {
+    return ResponseEntity.status(OK).build();
+  }
+
+  @Override
+  public ResponseEntity<MenuItemResponseDto> getMenuItem(String path) {
+    return ResponseEntity.status(OK).build();
+  }
+
+  @Override
+  public ResponseEntity<Void> moveMenuItem(UUID menuItemId, MoveMenuItemDto dto) {
     return ResponseEntity.status(NO_CONTENT).build();
   }
 

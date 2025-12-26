@@ -5,6 +5,7 @@ import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,7 +15,7 @@ public record AddGroupDto(
     @NotBlank(message = "Поле title не может быть пустым")
     String title,
     @Schema(description = "Признак активности группы", example = "true", requiredMode = REQUIRED)
-    @NotBlank(message = "Поле isActive не может быть null")
+    @NotNull(message = "Поле isActive не может быть null")
     Boolean isActive,
     @Schema(description = "Список ID пользователей группы",
         example = """
