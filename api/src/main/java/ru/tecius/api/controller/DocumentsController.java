@@ -37,7 +37,7 @@ import ru.tecius.api.dto.error.ErrorResponseDto;
 @RequestMapping("/api/v1/documents")
 public interface DocumentsController {
 
-  @Operation(summary = "Полнотекстовый поиск документов")
+  @Operation(summary = "API Для полнотекстового поиска документов")
   @ApiResponses(
       value = {
           @ApiResponse(responseCode = "200", description = "Получен список документов"),
