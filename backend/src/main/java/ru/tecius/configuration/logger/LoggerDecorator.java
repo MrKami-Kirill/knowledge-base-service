@@ -1,4 +1,4 @@
-package ru.tecius.config.logger;
+package ru.tecius.configuration.logger;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

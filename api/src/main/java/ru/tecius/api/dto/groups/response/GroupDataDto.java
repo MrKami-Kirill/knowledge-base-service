@@ -1,5 +1,6 @@
 package ru.tecius.api.dto.groups.response;
 
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.NOT_REQUIRED;
 import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -15,8 +16,8 @@ public record GroupDataDto(
     @Schema(description = "Название группы", example = "Группа 1", requiredMode = REQUIRED)
     String title,
     @Schema(description = "Признак активности группы", example = "true", requiredMode = REQUIRED)
-    boolean isActive,
-    @Schema(description = "Список пользователей группы", requiredMode = REQUIRED)
+    Boolean isActive,
+    @Schema(description = "Список пользователей группы", requiredMode = NOT_REQUIRED)
     List<UserDataDto> users) {
 
 }

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.tecius.api.dto.error.ErrorResponseDto;
+import ru.tecius.api.dto.menu.group.response.MenuItemGroupsResponseDto;
 import ru.tecius.api.dto.menu.permission.request.ChangeMenuItemGroupPermissionsDto;
 import ru.tecius.api.dto.menu.permission.request.ChangeMenuItemPermissionsDto;
 import ru.tecius.api.dto.menu.permission.request.ChangeMenuItemUserPermissionsDto;
@@ -35,7 +36,7 @@ public interface MenuController {
   @Operation(summary = "API Для получения списка пользователей элемента меню/документа")
   @ApiResponses(
       value = {
-          @ApiResponse(responseCode = "200", description = "Получен список пользователей"),
+          @ApiResponse(responseCode = "200", description = "Список пользователей получен"),
           @ApiResponse(responseCode = "404", description = "Ошибка получения данных",
               content = @Content(
                   schema = @Schema(implementation = ErrorResponseDto.class)
@@ -58,7 +59,7 @@ public interface MenuController {
   @Operation(summary = "API Для получения списка пользователей элемента меню/документа")
   @ApiResponses(
       value = {
-          @ApiResponse(responseCode = "200", description = "Получен список групп пользователей для элемента меню/документа"),
+          @ApiResponse(responseCode = "200", description = "Список групп пользователей получен"),
           @ApiResponse(responseCode = "404", description = "Ошибка получения данных",
               content = @Content(
                   schema = @Schema(implementation = ErrorResponseDto.class)
@@ -73,15 +74,15 @@ public interface MenuController {
               ))
       })
   @GetMapping("/{menuItemId}/groups")
-  ResponseEntity<MenuItemUsersResponseDto> getMenuItemGroups(
+  ResponseEntity<MenuItemGroupsResponseDto> getMenuItemGroups(
       @Schema(description = "ID элемента меню", example = "019b4f74-58e2-7185-9a4b-b82619f12503")
       @PathVariable UUID menuItemId
   );
 
-  @Operation(summary = "API Добавление/удаление пользователей у элемента меню")
+  @Operation(summary = "API Для изменения пользователей у элемента меню")
   @ApiResponses(
       value = {
-          @ApiResponse(responseCode = "200", description = "Изменен список разрешений для пользователей у элемента меню/документа"),
+          @ApiResponse(responseCode = "204", description = "Список разрешений для пользователей изменен"),
           @ApiResponse(responseCode = "400", description = "Ошибка обработки запроса",
               content = @Content(
                   schema = @Schema(implementation = ErrorResponseDto.class)
@@ -99,17 +100,39 @@ public interface MenuController {
                   schema = @Schema(implementation = ErrorResponseDto.class)
               ))
       })
-  @PostMapping("/{menuItemId}/permissions/users")
+  @PatchMapping("/{menuItemId}/permissions/users")
   ResponseEntity<Void> changeMenuItemUserPermissions(
       @Schema(description = "ID элемента меню", example = "019b4f74-58e2-7185-9a4b-b82619f12503")
       @PathVariable UUID menuItemId,
-      @RequestBody @Valid ChangeMenuItemUserPermissionsDto dto
+      @Schema(description = "DTO для изменения разрешений у элемента меню/документа",
+          example = """
+              {
+                "data": [
+                  {
+                    "id": "019b4f72-9605-7183-8b7b-1046adfd3847",
+                    "action": "ADD",
+                    "permissions": [
+                      "READ",
+                      "WRITE",
+                      "DELETE"
+                    ]
+                  },
+                  {
+                    "id": "019b4f72-9605-7183-8b7b-1046adfd3847",
+                    "action": "DELETE"
+                  }
+                ]
+              }
+              """,
+          requiredMode = REQUIRED,
+          implementation = ChangeMenuItemUserPermissionsDto.class)
+      @RequestBody @Valid Map<String,Object> dto
   );
 
-  @Operation(summary = "API Добавление/удаление групп пользователей у элемента меню")
+  @Operation(summary = "API Для изменения групп пользователей у элемента меню")
   @ApiResponses(
       value = {
-          @ApiResponse(responseCode = "200", description = "Изменен список разрешений для групп пользователей у элемента меню/документа"),
+          @ApiResponse(responseCode = "204", description = "Список разрешений для групп пользователей изменен"),
           @ApiResponse(responseCode = "400", description = "Ошибка обработки запроса",
               content = @Content(
                   schema = @Schema(implementation = ErrorResponseDto.class)
@@ -127,17 +150,39 @@ public interface MenuController {
                   schema = @Schema(implementation = ErrorResponseDto.class)
               ))
       })
-  @PostMapping("/{menuItemId}/permissions/groups")
+  @PatchMapping("/{menuItemId}/permissions/groups")
   ResponseEntity<Void> changeMenuItemGroupPermissions(
       @Schema(description = "ID элемента меню", example = "019b4f74-58e2-7185-9a4b-b82619f12503")
       @PathVariable UUID menuItemId,
-      @RequestBody @Valid ChangeMenuItemGroupPermissionsDto dto
+      @Schema(description = "DTO для изменения разрешений у элемента меню/документа",
+          example = """
+              {
+                "data": [
+                  {
+                    "id": "019b4f72-9605-7183-8b7b-1046adfd3847",
+                    "action": "ADD",
+                    "permissions": [
+                      "READ",
+                      "WRITE",
+                      "DELETE"
+                    ]
+                  },
+                  {
+                    "id": "019b4f72-9605-7183-8b7b-1046adfd3847",
+                    "action": "DELETE"
+                  }
+                ]
+              }
+              """,
+          requiredMode = REQUIRED,
+          implementation = ChangeMenuItemGroupPermissionsDto.class)
+      @RequestBody @Valid Map<String,Object> dto
   );
 
-  @Operation(summary = "API Изменение разрешений у элемента меню/документа")
+  @Operation(summary = "API Для изменения разрешений у элемента меню/документа")
   @ApiResponses(
       value = {
-          @ApiResponse(responseCode = "200", description = "Изменен список разрешений для групп пользователей у элемента меню/документа"),
+          @ApiResponse(responseCode = "204", description = "Разрешения изменены"),
           @ApiResponse(responseCode = "400", description = "Ошибка обработки запроса",
               content = @Content(
                   schema = @Schema(implementation = ErrorResponseDto.class)
@@ -202,14 +247,10 @@ public interface MenuController {
       @RequestBody Map<String, Object> dto
   );
 
-  @Operation(summary = "API на отображение дерева элементов меню в sidebar")
+  @Operation(summary = "API Для отображения дерева элементов меню в sidebar")
   @ApiResponses(
       value = {
-          @ApiResponse(responseCode = "200", description = "Получено дерево элементов"),
-          @ApiResponse(responseCode = "400", description = "Ошибка обработки запроса",
-              content = @Content(
-                  schema = @Schema(implementation = ErrorResponseDto.class)
-              )),
+          @ApiResponse(responseCode = "200", description = "Дерево элементов получено"),
           @ApiResponse(responseCode = "404", description = "Ошибка получения данных",
               content = @Content(
                   schema = @Schema(implementation = ErrorResponseDto.class)
@@ -229,14 +270,10 @@ public interface MenuController {
       @RequestParam(required = false) String path
   );
 
-  @Operation(summary = "API на отображение дерева элементов меню в sidebar")
+  @Operation(summary = "API Для отображения элемента меню в sidebar")
   @ApiResponses(
       value = {
-          @ApiResponse(responseCode = "200", description = "Получено дерево элементов"),
-          @ApiResponse(responseCode = "400", description = "Ошибка обработки запроса",
-              content = @Content(
-                  schema = @Schema(implementation = ErrorResponseDto.class)
-              )),
+          @ApiResponse(responseCode = "200", description = "Дерево элементов получено"),
           @ApiResponse(responseCode = "404", description = "Ошибка получения данных",
               content = @Content(
                   schema = @Schema(implementation = ErrorResponseDto.class)
@@ -256,10 +293,10 @@ public interface MenuController {
       @RequestParam String path
   );
 
-  @Operation(summary = "API Изменение структуры дерева элементов меню")
+  @Operation(summary = "API Для изменения структуры дерева элементов меню")
   @ApiResponses(
       value = {
-          @ApiResponse(responseCode = "204", description = "Изменен структура дерева элементов меню"),
+          @ApiResponse(responseCode = "204", description = "Структура дерева элементов изменена"),
           @ApiResponse(responseCode = "400", description = "Ошибка обработки запроса",
               content = @Content(
                   schema = @Schema(implementation = ErrorResponseDto.class)

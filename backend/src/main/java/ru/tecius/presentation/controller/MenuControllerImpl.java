@@ -9,8 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import ru.tecius.api.controller.MenuController;
-import ru.tecius.api.dto.menu.permission.request.ChangeMenuItemGroupPermissionsDto;
-import ru.tecius.api.dto.menu.permission.request.ChangeMenuItemUserPermissionsDto;
+import ru.tecius.api.dto.menu.group.response.MenuItemGroupsResponseDto;
 import ru.tecius.api.dto.menu.request.MoveMenuItemDto;
 import ru.tecius.api.dto.menu.response.MenuItemResponseDto;
 import ru.tecius.api.dto.menu.response.MenuTreeResponseDto;
@@ -26,19 +25,19 @@ public class MenuControllerImpl implements MenuController {
   }
 
   @Override
-  public ResponseEntity<MenuItemUsersResponseDto> getMenuItemGroups(UUID menuItemId) {
+  public ResponseEntity<MenuItemGroupsResponseDto> getMenuItemGroups(UUID menuItemId) {
     return ResponseEntity.status(OK).build();
   }
 
   @Override
   public ResponseEntity<Void> changeMenuItemUserPermissions(UUID menuItemId,
-      ChangeMenuItemUserPermissionsDto dto) {
+      Map<String, Object> dto) {
     return ResponseEntity.status(NO_CONTENT).build();
   }
 
   @Override
   public ResponseEntity<Void> changeMenuItemGroupPermissions(UUID menuItemId,
-      ChangeMenuItemGroupPermissionsDto dto) {
+      Map<String, Object> dto) {
     return ResponseEntity.status(NO_CONTENT).build();
   }
 

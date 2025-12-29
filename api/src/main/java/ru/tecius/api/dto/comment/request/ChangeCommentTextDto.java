@@ -10,6 +10,7 @@ public record ChangeCommentTextDto(
     @Schema(description = "Текст комментария", example = "Какой-то комментарий",
         requiredMode = REQUIRED)
     @NotBlank(message = "Поле text не может быть пустым")
-    String text) {
+    String text
+) {
 
 }

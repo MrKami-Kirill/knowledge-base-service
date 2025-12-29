@@ -1,9 +1,11 @@
 package ru.tecius.api.controller;
 
+import static org.springframework.http.HttpHeaders.LOCATION;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.headers.Header;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -38,7 +40,7 @@ public interface DocumentsController {
   @Operation(summary = "Полнотекстовый поиск документов")
   @ApiResponses(
       value = {
-          @ApiResponse(responseCode = "200", description = "Получен список комментариев документа"),
+          @ApiResponse(responseCode = "200", description = "Получен список документов"),
           @ApiResponse(responseCode = "500", description = "Ошибка сервера",
               content = @Content(
                   schema = @Schema(implementation = ErrorResponseDto.class)
@@ -58,7 +60,7 @@ public interface DocumentsController {
   @Operation(summary = "API Для скачивания документа в формате PDF")
   @ApiResponses(
       value = {
-          @ApiResponse(responseCode = "200", description = "Получен pdf файл документа"),
+          @ApiResponse(responseCode = "200", description = "Получен pdf файл"),
           @ApiResponse(responseCode = "404", description = "Ошибка получения данных",
               content = @Content(
                   schema = @Schema(implementation = ErrorResponseDto.class)
@@ -78,10 +80,10 @@ public interface DocumentsController {
       @PathVariable UUID documentId
   );
 
-  @Operation(summary = "API Получение сессии документа")
+  @Operation(summary = "API Для получения сессии документа")
   @ApiResponses(
       value = {
-          @ApiResponse(responseCode = "200", description = "Получена сессия документа"),
+          @ApiResponse(responseCode = "200", description = "Сессия получена"),
           @ApiResponse(responseCode = "404", description = "Ошибка получения данных",
               content = @Content(
                   schema = @Schema(implementation = ErrorResponseDto.class)
@@ -101,10 +103,14 @@ public interface DocumentsController {
       @PathVariable UUID documentId
   );
 
-  @Operation(summary = "API Создание сессии документа")
+  @Operation(summary = "API Для создания сессии документа")
   @ApiResponses(
       value = {
-          @ApiResponse(responseCode = "201", description = "Создана сессия документа"),
+          @ApiResponse(responseCode = "201", description = "Сессия документа создана",
+              headers = {
+                  @Header(name = LOCATION, description = "Новый URL-адрес для запрошенного ресурса",
+                      example = "/api/v1/documents/019b4f74-58e2-7185-9a4b-b82619f12503/sessions")
+              }),
           @ApiResponse(responseCode = "404", description = "Ошибка получения данных",
               content = @Content(
                   schema = @Schema(implementation = ErrorResponseDto.class)
@@ -124,10 +130,10 @@ public interface DocumentsController {
       @PathVariable UUID documentId
   );
 
-  @Operation(summary = "API Удаление сессии документа")
+  @Operation(summary = "API Для удаления сессии документа")
   @ApiResponses(
       value = {
-          @ApiResponse(responseCode = "204", description = "Удалена сессия документа"),
+          @ApiResponse(responseCode = "204", description = "Сессия удалена"),
           @ApiResponse(responseCode = "404", description = "Ошибка получения данных",
               content = @Content(
                   schema = @Schema(implementation = ErrorResponseDto.class)
@@ -147,10 +153,14 @@ public interface DocumentsController {
       @PathVariable UUID documentId
   );
 
-  @Operation(summary = "API создание черновика")
+  @Operation(summary = "API Для создания черновика документа")
   @ApiResponses(
       value = {
-          @ApiResponse(responseCode = "201", description = "Создана черновик документа"),
+          @ApiResponse(responseCode = "201", description = "Черновик создан",
+              headers = {
+                  @Header(name = LOCATION, description = "Новый URL-адрес для запрошенного ресурса",
+                      example = "/api/v1/documents/019b4f74-58e2-7185-9a4b-b82619f12503")
+              }),
           @ApiResponse(responseCode = "400", description = "Ошибка обработки запроса",
               content = @Content(
                   schema = @Schema(implementation = ErrorResponseDto.class)
@@ -171,7 +181,7 @@ public interface DocumentsController {
   @PostMapping("/draft")
   ResponseEntity<DraftDocumentResponseDto> draftDocument(@RequestBody @Valid DraftDocumentDto dto);
 
-  @Operation(summary = "API публикации документа")
+  @Operation(summary = "API Для публикации документа")
   @ApiResponses(
       value = {
           @ApiResponse(responseCode = "200", description = "Документ опубликован"),
@@ -199,7 +209,7 @@ public interface DocumentsController {
       @ModelAttribute @Valid PublishDocumentDto dto
   );
 
-  @Operation(summary = "API Удаление документа")
+  @Operation(summary = "API Для удаления документа")
   @ApiResponses(
       value = {
           @ApiResponse(responseCode = "204", description = "Документ удален"),
@@ -222,10 +232,10 @@ public interface DocumentsController {
       @PathVariable UUID documentId
   );
 
-  @Operation(summary = "API Получение истории изменений документа")
+  @Operation(summary = "API Для получения истории изменений документа")
   @ApiResponses(
       value = {
-          @ApiResponse(responseCode = "200", description = "Получена история изменений документа"),
+          @ApiResponse(responseCode = "200", description = "История изменений получена"),
           @ApiResponse(responseCode = "404", description = "Ошибка получения данных",
               content = @Content(
                   schema = @Schema(implementation = ErrorResponseDto.class)
@@ -245,10 +255,10 @@ public interface DocumentsController {
       @PathVariable UUID documentId
   );
 
-  @Operation(summary = "API Получение документа по ID")
+  @Operation(summary = "API Для получения документа по ID")
   @ApiResponses(
       value = {
-          @ApiResponse(responseCode = "200", description = "Получен документ",
+          @ApiResponse(responseCode = "200", description = "Документ получен",
               content = @Content(
                   schema = @Schema(example = """
                       --ZN0QkiMnU6Jm9vDkFEGh_KcPNNNPEPnuEEvHE
@@ -301,10 +311,10 @@ public interface DocumentsController {
       @PathVariable UUID documentId
   );
 
-  @Operation(summary = "API Получение документа по path")
+  @Operation(summary = "API Для получения документа по path")
   @ApiResponses(
       value = {
-          @ApiResponse(responseCode = "200", description = "Получен документ",
+          @ApiResponse(responseCode = "200", description = "Документ получен",
               content = @Content(
                   schema = @Schema(example = """
                       --ZN0QkiMnU6Jm9vDkFEGh_KcPNNNPEPnuEEvHE

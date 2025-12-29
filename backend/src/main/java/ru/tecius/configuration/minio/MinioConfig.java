@@ -1,4 +1,4 @@
-//package ru.tecius.config.minio;
+//package ru.tecius.configuration.minio;
 //
 //import io.minio.MinioClient;
 //import org.springframework.context.annotation.Bean;

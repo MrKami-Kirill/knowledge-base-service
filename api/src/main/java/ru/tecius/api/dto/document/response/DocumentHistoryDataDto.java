@@ -12,7 +12,7 @@ public record DocumentHistoryDataDto(
     @Schema(description = "Название элемента меню/документа", example = "Страница",
         requiredMode = REQUIRED)
     String title,
-    @Schema(description = "Дата публикации версии документа", example = "2025-12-25Т10:10:10+03:00",
+    @Schema(description = "Дата публикации версии документа", example = "2025-12-25T10:00:00Z",
         requiredMode = REQUIRED)
     OffsetDateTime date,
     @Schema(description = "Кто опубликовал версию документа", example = "Иванов Иван Иванович",

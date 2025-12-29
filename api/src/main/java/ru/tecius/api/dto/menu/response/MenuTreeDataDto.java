@@ -1,5 +1,6 @@
 package ru.tecius.api.dto.menu.response;
 
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.NOT_REQUIRED;
 import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -22,7 +23,7 @@ public record MenuTreeDataDto(
         requiredMode = REQUIRED)
     UUID uuid,
     @Schema(description = "Разрешения", example = "[\"READ\", \"WRITE\", \"DELETE\"]",
-        requiredMode = REQUIRED)
+        requiredMode = NOT_REQUIRED)
     List<Permission> permissions
 ) {
 

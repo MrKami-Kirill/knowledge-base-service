@@ -14,8 +14,8 @@ public record DraftDocumentDto(
     @NotBlank(message = "Поле title не может быть пустым")
     String title,
     @Schema(description = "ID родительского элемента меню/документа",
-        example = "019b4f72-9605-7183-8b7b-1046adfd3847",
-        requiredMode = NOT_REQUIRED)
-    UUID parentId) {
+        example = "019b4f72-9605-7183-8b7b-1046adfd3847", requiredMode = NOT_REQUIRED)
+    UUID parentId
+) {
 
 }

@@ -20,8 +20,8 @@ public record FullTextSearchDataDto(
     @Schema(description = "Название элемента меню/документа", example = "/stranica_1",
         requiredMode = REQUIRED)
     String title,
-    @Schema(description = "Обрезанный контент документа", example = "Тут могла быть ваша реклама...",
-        requiredMode = NOT_REQUIRED)
+    @Schema(description = "Обрезанный контент документа",
+        example = "Тут могла быть ваша реклама...", requiredMode = NOT_REQUIRED)
     String shortContent
 ) {
 

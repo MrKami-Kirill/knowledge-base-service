@@ -1,8 +1,10 @@
 package ru.tecius.api.controller;
 
+import static org.springframework.http.HttpHeaders.LOCATION;
 import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.headers.Header;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -26,10 +28,10 @@ import ru.tecius.api.dto.error.ErrorResponseDto;
 @RequestMapping("/api/v1/documents/{documentId}/attachments")
 public interface AttachmentsController {
 
-  @Operation(summary = "API Получение вложений документа")
+  @Operation(summary = "API Для получения списка вложений документа")
   @ApiResponses(
       value = {
-          @ApiResponse(responseCode = "200", description = "Получен список вложений документа"),
+          @ApiResponse(responseCode = "200", description = "Список вложений получен"),
           @ApiResponse(responseCode = "404", description = "Ошибка получения данных",
               content = @Content(
                   schema = @Schema(implementation = ErrorResponseDto.class)
@@ -49,10 +51,10 @@ public interface AttachmentsController {
       @PathVariable UUID documentId
   );
 
-  @Operation(summary = "API Получение комментариев к документу")
+  @Operation(summary = "API Для получения файла вложения документа")
   @ApiResponses(
       value = {
-          @ApiResponse(responseCode = "200", description = "Получен список вложений документа"),
+          @ApiResponse(responseCode = "200", description = "Файл вложения получен"),
           @ApiResponse(responseCode = "404", description = "Ошибка получения данных",
               content = @Content(
                   schema = @Schema(implementation = ErrorResponseDto.class)
@@ -74,10 +76,14 @@ public interface AttachmentsController {
       @PathVariable UUID attachmentId
   );
 
-  @Operation(summary = "API Добавление файла вложения")
+  @Operation(summary = "API Для добавления файла вложения к документу")
   @ApiResponses(
       value = {
-          @ApiResponse(responseCode = "200", description = "Получен список вложений документа"),
+          @ApiResponse(responseCode = "201", description = "Файл вложения добавлен",
+              headers = {
+                  @Header(name = LOCATION, description = "Новый URL-адрес для запрошенного ресурса",
+                      example = "/api/v1/documents/019b4f74-58e2-7185-9a4b-b82619f12503/attachments/019b4f74-58e2-7185-9a4b-b82619f12503")
+              }),
           @ApiResponse(responseCode = "400", description = "Ошибка обработки запроса",
               content = @Content(
                   schema = @Schema(implementation = ErrorResponseDto.class)
@@ -99,14 +105,14 @@ public interface AttachmentsController {
   ResponseEntity<Void> addAttachment(
       @Schema(description = "ID документа", example = "019b4f74-58e2-7185-9a4b-b82619f12503")
       @PathVariable UUID documentId,
-      @Schema(description = "", implementation = AddAttachmentDto.class)
+      @Schema(description = "DTO для добавления файла вложения к документу", implementation = AddAttachmentDto.class)
       @ModelAttribute @Valid AddAttachmentDto dto
   );
 
-  @Operation(summary = "API Удаление файла вложения")
+  @Operation(summary = "API Для удаления файла вложения у документа")
   @ApiResponses(
       value = {
-          @ApiResponse(responseCode = "200", description = "Получен список вложений документа"),
+          @ApiResponse(responseCode = "204", description = "Файл вложения удален"),
           @ApiResponse(responseCode = "404", description = "Ошибка получения данных",
               content = @Content(
                   schema = @Schema(implementation = ErrorResponseDto.class)

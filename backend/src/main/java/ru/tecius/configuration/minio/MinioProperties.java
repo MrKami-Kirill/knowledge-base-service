@@ -1,4 +1,4 @@
-package ru.tecius.config.minio;
+package ru.tecius.configuration.minio;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

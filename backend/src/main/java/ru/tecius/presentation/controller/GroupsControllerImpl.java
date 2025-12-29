@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import ru.tecius.api.controller.GroupsController;
 import ru.tecius.api.dto.groups.request.AddGroupDto;
+import ru.tecius.api.dto.groups.response.GroupDataDto;
 import ru.tecius.api.dto.groups.response.GroupsResponseDto;
 
 @RestController
@@ -19,6 +20,11 @@ public class GroupsControllerImpl implements GroupsController {
 
   @Override
   public ResponseEntity<GroupsResponseDto> getGroups() {
+    return ResponseEntity.status(OK).build();
+  }
+
+  @Override
+  public ResponseEntity<GroupDataDto> getGroupById(UUID groupId) {
     return ResponseEntity.status(OK).build();
   }
 

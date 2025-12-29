@@ -16,10 +16,10 @@ import ru.tecius.api.dto.permission.response.PermissionsResponseDto;
 @RequestMapping("/api/v1/permissions")
 public interface PermissionsController {
 
-  @Operation(summary = "API Получение списка разрешений (справочник)")
+  @Operation(summary = "API Для получения списка разрешений (справочник)")
   @ApiResponses(
       value = {
-          @ApiResponse(responseCode = "200", description = "Получен список разрешений"),
+          @ApiResponse(responseCode = "200", description = "Список разрешений получен"),
           @ApiResponse(responseCode = "500", description = "Ошибка сервера",
               content = @Content(
                   schema = @Schema(implementation = ErrorResponseDto.class)

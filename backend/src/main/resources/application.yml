@@ -117,8 +117,21 @@ spring:
   config:
     activate:
       on-profile: local,dev
+  data:
+    redis:
+      cluster-mode: false
 
 management:
   endpoint:
     env:
       show-values: always
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: prod
+  data:
+    redis:
+      cluster-mode: true

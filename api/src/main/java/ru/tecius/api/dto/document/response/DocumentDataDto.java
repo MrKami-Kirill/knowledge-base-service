@@ -24,21 +24,19 @@ public record DocumentDataDto(
     @Schema(description = "Признак наследования разрешений от родителя", example = "true",
         requiredMode = REQUIRED)
     Boolean inheritParentPermissions,
-    @Schema(description = "ID комментария", example = "true",
-        requiredMode = REQUIRED)
+    @Schema(description = "ID комментария", example = "true", requiredMode = REQUIRED)
     Boolean locked,
-    @Schema(description = "ID комментария", example = "true",
-        requiredMode = REQUIRED)
+    @Schema(description = "ID комментария", example = "true", requiredMode = REQUIRED)
     Boolean showHistory,
-    @Schema(description = "Признак, который разрешает/запрещает комментировать документ", example = "true",
-        requiredMode = REQUIRED)
+    @Schema(description = "Признак, который разрешает/запрещает комментировать документ",
+        example = "true", requiredMode = REQUIRED)
     Boolean allowComments,
-    @Schema(description = "Версия документа", example = "1",
-        requiredMode = REQUIRED)
+    @Schema(description = "Версия документа", example = "1", requiredMode = REQUIRED)
     Integer version,
-    @Schema(description = "Вложения документа", requiredMode = REQUIRED)
+    @Schema(description = "Вложения документа", requiredMode = NOT_REQUIRED)
     List<AttachmentDataDto> attachments,
-    @Schema(description = "Комментарии к документу", requiredMode = REQUIRED)
-    List<CommentDataDto> comments) {
+    @Schema(description = "Комментарии к документу", requiredMode = NOT_REQUIRED)
+    List<CommentDataDto> comments
+) {
 
 }

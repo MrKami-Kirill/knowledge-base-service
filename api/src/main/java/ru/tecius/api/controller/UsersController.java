@@ -19,7 +19,7 @@ public interface UsersController {
   @Operation(summary = "API Для получения списка пользователей")
   @ApiResponses(
       value = {
-          @ApiResponse(responseCode = "200", description = "Получен список пользователей"),
+          @ApiResponse(responseCode = "200", description = "Список пользователей получен"),
           @ApiResponse(responseCode = "500", description = "Ошибка сервера",
               content = @Content(
                   schema = @Schema(implementation = ErrorResponseDto.class)

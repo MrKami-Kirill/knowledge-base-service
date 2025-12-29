@@ -14,9 +14,8 @@ public record DraftDocumentResponseDto(
         requiredMode = REQUIRED)
     UUID documentId,
     @Schema(description = "Путь до элемента меню/документа",
-        example = "/stranica_1/novaya_stranica_1",
-        requiredMode = REQUIRED)
+        example = "/stranica_1/novaya_stranica_1", requiredMode = REQUIRED)
     String path
-    ) {
+) {
 
 }

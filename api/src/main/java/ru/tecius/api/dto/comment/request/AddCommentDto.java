@@ -10,8 +10,7 @@ import org.apache.logging.log4j.core.config.plugins.validation.constraints.NotBl
 @Schema(description = "DTO для создания комментария")
 public record AddCommentDto(
     @Schema(description = "ID родительского комментария",
-        example = "019b4f74-58e2-7185-9a4b-b82619f12503",
-        requiredMode = NOT_REQUIRED)
+        example = "019b4f74-58e2-7185-9a4b-b82619f12503", requiredMode = NOT_REQUIRED)
     UUID parentId,
     @Schema(description = "Текст комментария", example = "Какой-то комментарий",
         requiredMode = REQUIRED)

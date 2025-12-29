@@ -16,8 +16,7 @@ public record MenuItemUserPermissionsDto(
         requiredMode = REQUIRED)
     @NotNull(message = "Поле id не может быть null")
     UUID id,
-    @Schema(description = "Тип действия с разрешением", example = "ADD",
-        requiredMode = REQUIRED)
+    @Schema(description = "Тип действия с разрешением", example = "ADD", requiredMode = REQUIRED)
     @NotNull(message = "Поле action не может быть null")
     PermissionAction action,
     @Schema(description = "Разрешения", example = "[\"READ\", \"WRITE\", \"DELETE\"]",

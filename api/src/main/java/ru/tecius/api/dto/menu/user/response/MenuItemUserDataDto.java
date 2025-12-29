@@ -1,5 +1,6 @@
 package ru.tecius.api.dto.menu.user.response;
 
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.NOT_REQUIRED;
 import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -16,7 +17,7 @@ public record MenuItemUserDataDto(
         requiredMode = REQUIRED)
     String name,
     @Schema(description = "Разрешения", example = "[\"READ\", \"WRITE\", \"DELETE\"]",
-        requiredMode = REQUIRED)
+        requiredMode = NOT_REQUIRED)
     List<Permission> permissions
 ) {
 

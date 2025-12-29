@@ -19,11 +19,11 @@ public record CommentDataDto(
     @Schema(description = "Автор комментария", example = "Иванов Иван Иванович",
         requiredMode = REQUIRED)
     String author,
-    @Schema(description = "Дата комментария с тайм зоной", example = "2025-12-25T10:00:00+03:00ч",
+    @Schema(description = "Дата комментария", example = "2025-12-25T10:00:00Z",
         requiredMode = REQUIRED)
     OffsetDateTime date,
-    @Schema(description = "Дочерние комментарии",
-        requiredMode = NOT_REQUIRED)
-    List<CommentDataDto> children) {
+    @Schema(description = "Дочерние комментарии", requiredMode = NOT_REQUIRED)
+    List<CommentDataDto> children
+) {
 
 }

@@ -8,5 +8,7 @@ import java.util.List;
 @Schema(description = "DTO для отображения списка комментариев к документу")
 public record CommentsResponseDto(
     @Schema(description = "Список комментариев документа", requiredMode = REQUIRED)
-    List<CommentDataDto> data) {
+    List<CommentDataDto> data
+) {
+
 }

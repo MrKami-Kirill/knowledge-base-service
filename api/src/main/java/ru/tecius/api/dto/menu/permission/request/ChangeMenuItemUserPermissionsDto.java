@@ -10,9 +10,9 @@ import java.util.List;
 @Schema(description = "DTO добавления/удаления разрешений пользователям у элемента меню")
 public record ChangeMenuItemUserPermissionsDto(
     @Schema(description = "Список пользователей и разрешений", requiredMode = REQUIRED)
-    @NotNull(message = "Поле users не может быть null")
-    @NotEmpty(message = "Поле users не может быть пустым")
-    List<MenuItemUserPermissionsDto> users
+    @NotNull(message = "Поле data не может быть null")
+    @NotEmpty(message = "Поле data не может быть пустым")
+    List<MenuItemUserPermissionsDto> data
 ) {
 
 }

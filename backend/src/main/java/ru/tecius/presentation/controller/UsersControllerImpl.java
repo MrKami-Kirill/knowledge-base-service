@@ -2,12 +2,10 @@ package ru.tecius.presentation.controller;
 
 import static org.springframework.http.HttpStatus.OK;
 
-import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import ru.tecius.api.controller.UsersController;
-import ru.tecius.api.dto.menu.user.response.MenuItemUsersResponseDto;
 import ru.tecius.api.dto.user.response.UsersResponseDto;
 
 @RestController

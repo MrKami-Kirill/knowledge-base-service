@@ -4,13 +4,14 @@ import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 import static org.springframework.http.HttpStatus.OK;
 
+import java.util.Map;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import ru.tecius.api.controller.CommentsController;
 import ru.tecius.api.dto.comment.request.AddCommentDto;
-import ru.tecius.api.dto.comment.request.ChangeCommentTextDto;
+import ru.tecius.api.dto.comment.response.CommentDataDto;
 import ru.tecius.api.dto.comment.response.CommentsResponseDto;
 
 @RestController
@@ -21,6 +22,11 @@ public class CommentsControllerImpl implements CommentsController {
   public ResponseEntity<CommentsResponseDto> getComments(UUID documentId) {
     return ResponseEntity.status(OK).build();
 }
+
+  @Override
+  public ResponseEntity<CommentDataDto> getCommentById(UUID documentId, UUID commentId) {
+    return ResponseEntity.status(OK).build();
+  }
 
   @Override
   public ResponseEntity<Void> addComment(UUID documentId, AddCommentDto dto) {
@@ -34,7 +40,8 @@ public class CommentsControllerImpl implements CommentsController {
 
   @Override
   public ResponseEntity<Void> changeCommentText(UUID documentId, UUID commentId,
-      ChangeCommentTextDto dto) {
+      Map<String, Object> dto) {
     return ResponseEntity.status(NO_CONTENT).build();
   }
+
 }
