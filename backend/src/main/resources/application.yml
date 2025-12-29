@@ -20,7 +20,7 @@ management:
       mode: full
 
 server:
-  port: \${SERVER_PORT:8084}
+  port: \${SERVER_PORT:8087}
   shutdown: graceful
 
 spring:
